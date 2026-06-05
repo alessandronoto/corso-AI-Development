@@ -24,6 +24,7 @@ L'obiettivo è sviluppare un modello di machine learning basato su tecniche di N
 - ***Accuratezza:*** Ridurre gli errori umani nell'identificazione delle lingue.
 
 ***Specifiche del Progetto:***
+
 ***Dataset:*** Il dataset è disponibile a questo link: https://raw.githubusercontent.com/Profession-AI/progetti-ml/refs/heads/main/Modello%20per%20l'identificazione%20della%20lingua%20dei%20testi%20di%20un%20museo/museo_descrizioni.csv.
 
 Contiene varie descrizioni in più lingue, con una colonna che rappresenta il codice della lingua, che è il target da prevedere.
