@@ -46,3 +46,14 @@ Contiene varie descrizioni in più lingue, con una colonna che rappresenta il co
     - Addestramento e validazione del modello sul dataset fornito.
 3. *Valutazione:*
     - Utilizzare metriche come accuratezza, precisione, richiamo e F1-score per valutare le prestazioni del modello.
+
+---
+
+***Analisi delle Performance e Risultati***
+
+Il modello è stato addestrato su un dataset bilanciato e valutato su un test set pari al 30% dei dati disponibili, ottenendo un'**accuratezza complessiva del 99%**.
+
+### Considerazioni Chiave:
+* **Prevenzione Overfitting:** Nonostante il set di training presenti un'accuratezza pari a 1 (100%), le performance stabili sul set di test (99%) escludono fenomeni di overfitting, confermando la robustezza del modello su dati non visti.
+* **Il caso del Tedesco:** Precision e Recall sono pari a 1. Questo risultato d'eccellenza è dovuto alla struttura unica della lingua tedesca, caratterizzata da combinazioni di lettere e n-grammi fortemente distintivi rispetto alle altre lingue.
+* **Analisi degli Errori (Italiano vs Inglese):** L'analisi delle metriche evidenzia che il modello ha scambiato una singola frase inglese catalogandola come italiana (Recall dell'inglese a 0.96 e Precision dell'italiano a 0.97)
