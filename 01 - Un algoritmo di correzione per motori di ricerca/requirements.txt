@@ -1,0 +1,2 @@
+# utilizzata solamente la Standard Library di Python
+# non sono necessarie librerie esterne
