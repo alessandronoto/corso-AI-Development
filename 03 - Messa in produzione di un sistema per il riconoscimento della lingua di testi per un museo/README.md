@@ -26,6 +26,7 @@ Implementare un'API REST utilizzando Flask o FastAPI per esporre le funzionalit�
 - ***Integrazione***: Facilitare l'uso del sistema in applicazioni software esistenti.
 - ***Scalabilità***: Permettere un utilizzo parallelo da parte di più utenti.
 
+---
 
 *Specifiche del progetto*
 
