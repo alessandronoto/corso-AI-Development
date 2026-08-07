@@ -25,3 +25,10 @@ Implementare un'API REST utilizzando Flask o FastAPI per esporre le funzionalit�
 - ***Accessibilità***: Consentire ai reparti del museo di accedere al servizio da remoto.
 - ***Integrazione***: Facilitare l'uso del sistema in applicazioni software esistenti.
 - ***Scalabilità***: Permettere un utilizzo parallelo da parte di più utenti.
+
+
+**Specifiche del progetto**
+
+***Backend***:
+  - Python con Flask o FastAPI.
+  - Il modello di riconoscimento della lingua è disponibile a questo link: https://github.com/Profession-AI/progetti-python/raw/refs/heads/main/Messa%20in%20produzione%20di%20un%20sistema%20per%20il%20riconoscimento%20della%20lingua%20di%20testi%20per%20un%20museo/languagedetectionpipeline.pkl. È un file pickle che si può importare. Il metodo predict() dell'oggetto in esso conteuto consente di ottenere la previsione della lingua.
