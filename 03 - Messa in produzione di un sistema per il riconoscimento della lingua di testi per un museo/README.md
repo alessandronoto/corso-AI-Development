@@ -7,13 +7,11 @@
 
 **MuseumLangID**, il sistema sviluppato per il riconoscimento automatico della lingua di testi museali, è pronto per essere messo in produzione. L'obiettivo principale è fornire le funzionalità del modello tramite un'**API REST** per integrarlo facilmente nei sistemi gestionali e software del museo.
 
----
 
 ## Problema
 
 Il museo richiede un **accesso remoto e standardizzato** alle funzionalità del modello di riconoscimento della lingua. Attualmente, il sistema è limitato all'utilizzo locale, ostacolando la collaborazione tra i vari reparti dell'organizzazione e impedendo l'integrazione con altri strumenti software già in uso.
 
----
 
 ## Obiettivo del Progetto
 
@@ -23,7 +21,6 @@ Implementare un'API RESTful per esporre le funzionalità del modello di Machine 
 2. **Restituire** il codice ISO della lingua riconosciuta e il relativo indice di confidenza.
 3. **Garantire** scalabilità, robustezza e predisposizione per l'integrazione con sistemi e client esterni.
 
----
 
 ## Benefici Attesi
 
@@ -31,7 +28,6 @@ Implementare un'API RESTful per esporre le funzionalità del modello di Machine 
 - **Integrazione**: Facilitare l'interoperabilità del sistema con le infrastrutture ed i gestionali software esistenti.
 - **Scalabilità**: Permettere un utilizzo simultaneo e in parallelo da parte di più utenti o sistemi automatizzati.
 
----
 
 ## Specifiche Tecniche e Funzionali
 
@@ -39,7 +35,6 @@ Implementare un'API RESTful per esporre le funzionalità del modello di Machine 
 - **Language & Framework**: Python 3.9+ con **FastAPI**
 - **Machine Learning Core**: Pipeline Scikit-learn caricata da file Pickle (`languagedetectionpipeline.pkl`)
 
----
 
 ### Specifiche dell'API REST
 
