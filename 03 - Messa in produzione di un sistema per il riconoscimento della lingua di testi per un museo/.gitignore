@@ -10,3 +10,4 @@ env/
 # File di ambiente o configurazioni locali
 .DS_Store
 .vscode/
+log_info.log
