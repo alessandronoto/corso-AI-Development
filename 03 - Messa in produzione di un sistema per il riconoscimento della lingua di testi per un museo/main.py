@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 #Configurazione del file di log
 logging.basicConfig(
-    filename="log_info.log",   #definiamo il nome del fiel in cui salvare i log
+    filename="log_info.log",   #definiamo il nome del file in cui salvare i log
     level=logging.INFO,   #definiamo il livello minimo dei messaggi da registrare
     format="%(asctime)s - %(levelname)s - %(message)s")  #definiamo il formato della messaggio
 
