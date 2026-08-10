@@ -6,19 +6,30 @@ from pydantic import BaseModel
 
 #Configurazione del file di log
 logging.basicConfig(
-    filename="log_info.log",   #definiamo il nome del file in cui salvare i log
-    level=logging.INFO,   #definiamo il livello minimo dei messaggi da registrare
-    format="%(asctime)s - %(levelname)s - %(message)s")  #definiamo il formato della messaggio
+    filename = "log_info.log",   #definiamo il nome del file in cui salvare i log
+    level = logging.INFO,   #definiamo il livello minimo dei messaggi da registrare
+    format = "%(asctime)s - %(levelname)s - %(message)s")  #definiamo il formato del messaggio
 
+#Isoliamo i log relativi all'API
+logger = logging.getLogger(__name__)
 
 #Caricamento del Modello di Machine Learning
-filename="language_detection_pipeline.pkl"
-loaded_pipeline=pickle.load(open(filename, "rb"))
+filename = "language_detection_pipeline.pkl"
+
+try:
+    with open(filename, "rb") as f:
+        loaded_pipeline = pickle.load(f)
+except FileNotFoundError:
+    logger.warning(f"ERRORE: File {filename} non trovato")
+    raise SystemExit("Impossibile avviare il server: file mancante")
+except Exception as e:
+    logger.warning(f"Errore durante il caricamento del file: {e}")
+    raise SystemExit("Impossibile avviare il server: errore nel caricamento del file")
 
 #Creazione istanza
-app=FastAPI(
-    title="MuseumLangAPI",
-    description="API per l'identificazione della lingua di un testo"
+app = FastAPI(
+    title = "MuseumLangAPI",
+    description = "API per l'identificazione della lingua di un testo"
 )
 
 #Creazione schemi Pydantic
@@ -27,24 +38,44 @@ class TextRequest(BaseModel):
     
 class LanguageResponse(BaseModel):
     language_code: str
+    confidence: float
 
 #Creazione endpoint
-@app.post("/identify-language", response_model=LanguageResponse)
+@app.post("/identify-language", response_model = LanguageResponse)
 def identify_language(request: TextRequest):
+    """
+    Aalizza il testo inviato all'endpoint e restituisce il codice della lingua
+    identificate ed il relativo livello di confidenza
+    """
     #verifico che l'input non sia vuoto
-    clean_text=request.text.strip()
+    clean_text = request.text.strip()
     if not clean_text:
-        logging.warning("Testo vuoto")
-        raise HTTPException(status_code=400, detail="Il testo inviato non può essere vuoto")
+        logger.warning("Testo vuoto")
+        raise HTTPException(status_code = 400, detail = "Il testo inviato non può essere vuoto")
 
-    #Registro della richiesta
-    logging.info(f"Testo inviato: {clean_text[:30]}...")
+    #Registro la richiesta
+    log_text = clean_text[:30] +"..." if len(clean_text) > 30 else clean_text
+    logger.info(f"Testo inviato: {log_text}")
+
+    #Calcolo delle probabilità delle varie lingue identificabili dal modello
+    probabilities = loaded_pipeline.predict_proba([clean_text])[0]
+
+    #Calcolo della probabilità massima della lingua identificata
+    max_proba = float(max(probabilities))
+
+    #Verifico che la confidenza sia sopra una soglia minima che rende l'identificazione affidabile
+    valore_soglia = 0.35
+    if max_proba < valore_soglia:
+        logger.warning(f"Lingua non identificabile (confidenza troppo bassa: {max_proba:.2f})")
+        raise HTTPException(
+            status_code = 400,
+            detail = "Impossibile identificare la lingua")
 
     #Previsione lingua con il modello di ML caricato in precedenza
-    prediction=loaded_pipeline.predict([clean_text])[0]
+    prediction = loaded_pipeline.predict([clean_text])[0]
 
     #Registro risultato
-    logging.info(f"Lingua identificata: {prediction}")
+    logger.info(f"Lingua identificata: {prediction}")
 
     #Restituiamo come output della funzione un oggetto di tipo LanguageResponse
-    return LanguageResponse(language_code=str(prediction))
+    return LanguageResponse(language_code=str(prediction), confidence = max_proba)
