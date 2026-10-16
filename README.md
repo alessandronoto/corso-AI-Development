@@ -12,5 +12,8 @@ raccolta progetti del corso in AI Development di Profession AI
 ***📂 03 - Messa in produzione di un sistema per il riconoscimento della lingua di testi per un museo***
   - argomenti: Sviluppo di REST API
 
+***📂 04 - Analisi delle vendite di un sito e-commerce***
+  - argomenti: Database relazionale con SQL
+
 In aggiornamento...
 
