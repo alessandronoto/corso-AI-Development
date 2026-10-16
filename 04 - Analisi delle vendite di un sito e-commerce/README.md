@@ -1,4 +1,4 @@
-Analisi dei dati di vendita di un e-commerce con SQL
+**Analisi dei dati di vendita di un e-commerce con SQL**
 
 questo progetto costituisce il lavoro pratico di fine modulo focalizzato sui **Database relazionali con SQL**
 
